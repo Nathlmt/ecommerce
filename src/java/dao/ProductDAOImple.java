@@ -26,12 +26,15 @@ public class ProductDAOImple implements ProductDAO {
                 int categoryID = rs.getInt("Categorycategory_id");
                 String name = rs.getString("name");
                 float price = rs.getFloat("price");
+                String image1 = rs.getString("image1");
+                String image2 = rs.getString("image2");
+                String image3 = rs.getString("image3");
+                String image4 = rs.getString("image4");
+                String image5 = rs.getString("image5");
                 String description = rs.getString("description");
-                String descriptionDetail = rs.getString("description_detail");
-                String image = rs.getString("image");
                 String thumbImage = rs.getString("thumb_image");
                 Date lastUpdate = rs.getDate("last_update");
-                list.add(new Product(productID, name, price, description, lastUpdate, categoryID, image, thumbImage, descriptionDetail));
+                list.add(new Product(productID, name, price, description, image1, image2, image3, image4, image5, thumbImage, lastUpdate, categoryID));
             }
             con.close();
         } catch (SQLException e) {
@@ -60,10 +63,9 @@ public class ProductDAOImple implements ProductDAO {
 ////    }
     public static void main(String[] args) {
         //Product p = new Product(0, 1, "S6", "da", 500000.0 ,"","");
-        ProductDAOImple productDAO = new ProductDAOImple();
-        System.out.println(productDAO.getList().get(0));
-        System.out.println("hello");
-        Product p = new Product();
-        System.out.println(p);
+        ProductDAOImple productDAO1 = new ProductDAOImple();
+        productDAO1.getList().forEach((p) -> {
+            System.out.print(p.getImage1());
+        });
     }
 }

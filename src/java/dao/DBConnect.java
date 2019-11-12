@@ -30,7 +30,7 @@ public class DBConnect {
         Connection connect = getConnect();
         PreparedStatement stmt = (PreparedStatement) connect.createStatement();
         stmt.executeUpdate(sql);
-    }
+    }   
 
     public ResultSet selectData(String sql) throws Exception {
         Connection connect = getConnect();
