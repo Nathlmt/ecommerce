@@ -27,6 +27,8 @@
 					.getName();
             String description = productDAO.getProduct(Integer.parseInt(productID))
 					.getDescription();
+            float price = productDAO.getProduct(Integer.parseInt(productID))
+					.getPrice();
             %>
     <!-- Title  -->
     <title>Hust Camera - <%=name%></title>
@@ -125,10 +127,9 @@
                     <div class="col-12">
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb mt-50">
-                                <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                <li class="breadcrumb-item"><a href="#">Furniture</a></li>
-                                <li class="breadcrumb-item"><a href="#">Chairs</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">white modern chair</li>
+                                <li class="breadcrumb-item"><a href="./index.jsp">Home</a></li>
+                                <li class="breadcrumb-item"><a href="#">Category</a></li>
+                                <li class="breadcrumb-item"><a href="#"><%=name%></a></li>
                             </ol>
                         </nav>
                     </div>
@@ -179,7 +180,7 @@
                             <!-- Product Meta Data -->
                             <div class="product-meta-data">
                                 <div class="line"></div>
-                                <p class="product-price">$180</p>
+                                <p class="product-price"><%=price%> đ</p>
                                 <a href="product-details.jsp">
                                     <h6><%=name%></h6>
                                 </a>

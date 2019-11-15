@@ -1,6 +1,7 @@
 package dao;
 
 import dao.ProductDAO;
+import entity.Category;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -74,6 +75,24 @@ public class ProductDAOImple implements ProductDAO {
         return p;
     }
 
+       public Category getCategory(int id) {
+        Connection con = DBConnect.getConnect();
+        String sql = "SELECT * FROM category WHERE category_id='" + id + "'";
+   
+        try {
+            PreparedStatement ps = (PreparedStatement) con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                int categoryID = rs.getInt("category_id");
+                String categoryName = rs.getString("name");
+                Category c = new Category(categoryID,categoryName);
+            }
+            con.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return c;
+    }
     public static void main(String[] args) {
         //Product p = new Product(0, 1, "S6", "da", 500000.0 ,"","");
         ProductDAOImple productDAO1 = new ProductDAOImple();
