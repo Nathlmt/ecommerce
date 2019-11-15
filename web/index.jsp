@@ -12,7 +12,7 @@
     <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
     <!-- Title  -->
-    <title>Web ban do trang tri</title>
+    <title>Hust Camera</title>
 
     <!-- Favicon  -->
     <link rel="icon" href="img/core-img/favicon.ico">
@@ -107,14 +107,13 @@
                 ProductDAOImple productDAO1 = new ProductDAOImple();
                 for (Product p : productDAO1.getList()) {
             %>
-                <!-- Single Catagory -->
                 <div class="single-products-catagory clearfix">
-                    <a href="shop.jsp">
-                        <img src="<%=p.getImage1()%>" alt="">
+                    <a href="product-details.jsp?productID=<%=p.getProductID()%>">
+                        <img src="<%=p.getImage1()%>.jpg" alt="">
                         <!-- Hover Content -->
                         <div class="hover-content">
                             <div class="line"></div>
-                            <p>From $180</p>
+                            <p><%=p.getPrice()%></p>
                             <h4><%=p.getName()%></h4>
                         </div>
                     </a>

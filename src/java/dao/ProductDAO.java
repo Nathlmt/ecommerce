@@ -20,6 +20,6 @@ public interface ProductDAO {
 	
         //hiển thị sản phẩm theo id
 //	public Product getProduct(int ProductID);
-	
+	public Product getProduct(int id);
 
 }
