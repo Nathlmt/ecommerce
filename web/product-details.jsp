@@ -1,3 +1,4 @@
+<%@page import="dao.ProductDAOImple"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -8,9 +9,29 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-
+    <%
+            String productID = "";
+              if (request.getParameter("productID") != null) {
+                    productID = request.getParameter("productID");
+            } 
+            ProductDAOImple productDAO = new ProductDAOImple();
+            String image1 = productDAO.getProduct(Integer.parseInt(productID))
+					.getImage1();
+            String image2 = productDAO.getProduct(Integer.parseInt(productID))
+					.getImage2();
+            String image3 = productDAO.getProduct(Integer.parseInt(productID))
+					.getImage3();
+            String image4 = productDAO.getProduct(Integer.parseInt(productID))
+					.getImage4();
+            String name = productDAO.getProduct(Integer.parseInt(productID))
+					.getName();
+            String description = productDAO.getProduct(Integer.parseInt(productID))
+					.getDescription();
+            float price = productDAO.getProduct(Integer.parseInt(productID))
+					.getPrice();
+            %>
     <!-- Title  -->
-    <title>Amado - Furniture Ecommerce Template | Product Details</title>
+    <title>Hust Camera - <%=name%></title>
 
     <!-- Favicon  -->
     <link rel="icon" href="img/core-img/favicon.ico">
@@ -106,10 +127,9 @@
                     <div class="col-12">
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb mt-50">
-                                <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                <li class="breadcrumb-item"><a href="#">Furniture</a></li>
-                                <li class="breadcrumb-item"><a href="#">Chairs</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">white modern chair</li>
+                                <li class="breadcrumb-item"><a href="./index.jsp">Home</a></li>
+                                <li class="breadcrumb-item"><a href="#">Category</a></li>
+                                <li class="breadcrumb-item"><a href="#"><%=name%></a></li>
                             </ol>
                         </nav>
                     </div>
@@ -120,34 +140,35 @@
                         <div class="single_product_thumb">
                             <div id="product_details_slider" class="carousel slide" data-ride="carousel">
                                 <ol class="carousel-indicators">
-                                    <li class="active" data-target="#product_details_slider" data-slide-to="0" style="background-image: url(img/product-img/pro-big-1.jpg);">
+                                    <li class="active" data-target="#product_details_slider" data-slide-to="0" style="background-image: url(<%=image1%>.jpg);">
                                     </li>
-                                    <li data-target="#product_details_slider" data-slide-to="1" style="background-image: url(img/product-img/pro-big-2.jpg);">
+                                    <li data-target="#product_details_slider" data-slide-to="1" style="background-image: url(<%=image2%>.jpg);">
                                     </li>
-                                    <li data-target="#product_details_slider" data-slide-to="2" style="background-image: url(img/product-img/pro-big-3.jpg);">
+                                    <li data-target="#product_details_slider" data-slide-to="2" style="background-image: url(<%=image3%>.jpg);">
                                     </li>
-                                    <li data-target="#product_details_slider" data-slide-to="3" style="background-image: url(img/product-img/pro-big-4.jpg);">
+                                    <li data-target="#product_details_slider" data-slide-to="3" style="background-image: url(<%=image4%>.jpg);">
                                     </li>
                                 </ol>
                                 <div class="carousel-inner">
                                     <div class="carousel-item active">
-                                        <a class="gallery_img" href="img/product-img/pro-big-1.jpg">
-                                            <img class="d-block w-100" src="img/product-img/pro-big-1.jpg" alt="First slide">
+                                        <a class="gallery_img" href="<%=image1%>.jpg">
+                                            <img class="d-block w-100" src="<%=image1%>.jpg" alt="First slide">
                                         </a>
                                     </div>
                                     <div class="carousel-item">
-                                        <a class="gallery_img" href="img/product-img/pro-big-2.jpg">
-                                            <img class="d-block w-100" src="img/product-img/pro-big-2.jpg" alt="Second slide">
+                                        <a class="gallery_img" href="<%=image2%>.jpg">
+                                            <img class="d-block w-100" src="<%=image2%>.jpg" alt="Second slide">
                                         </a>
                                     </div>
                                     <div class="carousel-item">
-                                        <a class="gallery_img" href="img/product-img/pro-big-3.jpg">
-                                            <img class="d-block w-100" src="img/product-img/pro-big-3.jpg" alt="Third slide">
+                                        <a class="gallery_img" 
+                                        href="<%=image3%>.jpg">
+                                            <img class="d-block w-100" src="<%=image3%>.jpg" alt="Third slide">
                                         </a>
                                     </div>
                                     <div class="carousel-item">
-                                        <a class="gallery_img" href="img/product-img/pro-big-4.jpg">
-                                            <img class="d-block w-100" src="img/product-img/pro-big-4.jpg" alt="Fourth slide">
+                                        <a class="gallery_img" href="<%=image4%>.jpg">
+                                            <img class="d-block w-100" src="<%=image4%>.jpg" alt="Fourth slide">
                                         </a>
                                     </div>
                                 </div>
@@ -159,9 +180,9 @@
                             <!-- Product Meta Data -->
                             <div class="product-meta-data">
                                 <div class="line"></div>
-                                <p class="product-price">$180</p>
+                                <p class="product-price"><%=price%> đ</p>
                                 <a href="product-details.jsp">
-                                    <h6>White Modern Chair</h6>
+                                    <h6><%=name%></h6>
                                 </a>
                                 <!-- Ratings & Review -->
                                 <div class="ratings-review mb-15 d-flex align-items-center justify-content-between">
@@ -181,9 +202,9 @@
                             </div>
 
                             <div class="short_overview my-5">
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid quae eveniet culpa officia quidem mollitia impedit iste asperiores nisi reprehenderit consequatur, autem, nostrum pariatur enim?</p>
+                                <p><%=description%></p>
                             </div>
-
+                            
                             <!-- Add to Cart Form -->
                             <form class="cart clearfix" method="post">
                                 <div class="cart-btn d-flex mb-50">

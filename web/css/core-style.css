@@ -7,16 +7,6 @@
 @import url(../css/jquery-ui.min.css);
 @import url(../css/nice-select.css);
 @import url(../css/font-awesome.min.css);
-@font-face {
-  font-family: 'helveticaneuebold';
-  src: url("../fonts/helvetica_neu_bold-webfont.woff2") format("woff2"), url("../fonts/helvetica_neu_bold-webfont.woff") format("woff");
-  font-weight: normal;
-  font-style: normal; }
-@font-face {
-  font-family: 'helveticaneuemedium';
-  src: url("../fonts/helveticaneue_medium-webfont.woff2") format("woff2"), url("../fonts/helveticaneue_medium-webfont.woff") format("woff");
-  font-weight: normal;
-  font-style: normal; }
 /* :: 2.0 Import All CSS */
 /* :: 3.0 Base CSS */
 * {
@@ -24,7 +14,7 @@
   padding: 0; }
 
 body {
-  font-family: "helveticaneuemedium";
+  font-family: "Arial";
   font-size: 16px; }
 
 h1,
@@ -458,7 +448,7 @@ img {
       display: block;
       line-height: 0.9;
       color: #131212;
-      font-weight: normal; }
+      font-weight: 600; }
       .main-content-wrapper .header-area .amado-nav li a::after {
         -webkit-transition-duration: 500ms;
         transition-duration: 500ms;
