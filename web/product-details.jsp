@@ -1,4 +1,7 @@
 <%@page import="dao.ProductDAOImple"%>
+<%@page import="dao.CategoryDAOImple"%>
+<%@page import="entity.Product"%>
+<%@page import="entity.Category"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -15,20 +18,17 @@
                     productID = request.getParameter("productID");
             } 
             ProductDAOImple productDAO = new ProductDAOImple();
-            String image1 = productDAO.getProduct(Integer.parseInt(productID))
-					.getImage1();
-            String image2 = productDAO.getProduct(Integer.parseInt(productID))
-					.getImage2();
-            String image3 = productDAO.getProduct(Integer.parseInt(productID))
-					.getImage3();
-            String image4 = productDAO.getProduct(Integer.parseInt(productID))
-					.getImage4();
-            String name = productDAO.getProduct(Integer.parseInt(productID))
-					.getName();
-            String description = productDAO.getProduct(Integer.parseInt(productID))
-					.getDescription();
-            float price = productDAO.getProduct(Integer.parseInt(productID))
-					.getPrice();
+            CategoryDAOImple categoryDAO = new CategoryDAOImple();
+            Product currentProduct = productDAO.getProduct(Integer.parseInt(productID));
+            String image1 = currentProduct.getImage1();
+            String image2 = currentProduct.getImage2();
+            String image3 = currentProduct.getImage3();
+            String image4 = currentProduct.getImage4();
+            String name = currentProduct.getName();
+            String description = currentProduct.getDescription();
+            float price = currentProduct.getPrice();
+            int categoryID = currentProduct.getCategoryID();
+            Category currentCategory = categoryDAO.getCategoryByID(categoryID);
             %>
     <!-- Title  -->
     <title>Hust Camera - <%=name%></title>
@@ -128,7 +128,7 @@
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb mt-50">
                                 <li class="breadcrumb-item"><a href="./index.jsp">Home</a></li>
-                                <li class="breadcrumb-item"><a href="#">Category</a></li>
+                                <li class="breadcrumb-item"><a href="#"><%=currentCategory.getName()%></a></li>
                                 <li class="breadcrumb-item"><a href="#"><%=name%></a></li>
                             </ol>
                         </nav>
@@ -140,13 +140,17 @@
                         <div class="single_product_thumb">
                             <div id="product_details_slider" class="carousel slide" data-ride="carousel">
                                 <ol class="carousel-indicators">
-                                    <li class="active" data-target="#product_details_slider" data-slide-to="0" style="background-image: url(<%=image1%>.jpg);">
+                                    <li class="active" data-target="#product_details_slider" data-slide-to="0"
+                                        style="background-image: url(<%=image1%>.jpg);">
                                     </li>
-                                    <li data-target="#product_details_slider" data-slide-to="1" style="background-image: url(<%=image2%>.jpg);">
+                                    <li data-target="#product_details_slider" data-slide-to="1"
+                                        style="background-image: url(<%=image2%>.jpg);">
                                     </li>
-                                    <li data-target="#product_details_slider" data-slide-to="2" style="background-image: url(<%=image3%>.jpg);">
+                                    <li data-target="#product_details_slider" data-slide-to="2"
+                                        style="background-image: url(<%=image3%>.jpg);">
                                     </li>
-                                    <li data-target="#product_details_slider" data-slide-to="3" style="background-image: url(<%=image4%>.jpg);">
+                                    <li data-target="#product_details_slider" data-slide-to="3"
+                                        style="background-image: url(<%=image4%>.jpg);">
                                     </li>
                                 </ol>
                                 <div class="carousel-inner">
@@ -161,8 +165,7 @@
                                         </a>
                                     </div>
                                     <div class="carousel-item">
-                                        <a class="gallery_img" 
-                                        href="<%=image3%>.jpg">
+                                        <a class="gallery_img" href="<%=image3%>.jpg">
                                             <img class="d-block w-100" src="<%=image3%>.jpg" alt="Third slide">
                                         </a>
                                     </div>
@@ -204,18 +207,25 @@
                             <div class="short_overview my-5">
                                 <p><%=description%></p>
                             </div>
-                            
+
                             <!-- Add to Cart Form -->
                             <form class="cart clearfix" method="post">
                                 <div class="cart-btn d-flex mb-50">
                                     <p>Qty</p>
                                     <div class="quantity">
-                                        <span class="qty-minus" onclick="var effect = document.getElementById('qty'); var qty = effect.value; if( !isNaN( qty ) &amp;&amp; qty &gt; 1 ) effect.value--;return false;"><i class="fa fa-caret-down" aria-hidden="true"></i></span>
-                                        <input type="number" class="qty-text" id="qty" step="1" min="1" max="300" name="quantity" value="1">
-                                        <span class="qty-plus" onclick="var effect = document.getElementById('qty'); var qty = effect.value; if( !isNaN( qty )) effect.value++;return false;"><i class="fa fa-caret-up" aria-hidden="true"></i></span>
+                                        <span class="qty-minus" onclick="var effect = document.getElementById('qty'); var qty = effect.value;
+                                         if( !isNaN( qty ) &amp;&amp; qty &gt; 1 ) effect.value--;return false;"><i
+                                                class="fa fa-caret-down" aria-hidden="true"></i></span>
+                                        <input type="number" class="qty-text" id="qty" step="1" min="1" max="300"
+                                            name="quantity" value="1">
+                                        <span class="qty-plus"
+                                            onclick="var effect = document.getElementById('qty'); 
+                                            var qty = effect.value; if( !isNaN( qty )) effect.value++;return false;"><i
+                                                class="fa fa-caret-up" aria-hidden="true"></i></span>
                                     </div>
                                 </div>
-                                <button type="submit" name="addtocart" value="5" class="btn amado-btn">Add to cart</button>
+                                <button type="submit" name="addtocart" value="5" class="btn amado-btn">Add to
+                                    cart</button>
                             </form>
 
                         </div>
@@ -235,7 +245,8 @@
                 <div class="col-12 col-lg-6 col-xl-7">
                     <div class="newsletter-text mb-100">
                         <h2>Subscribe for a <span>25% Discount</span></h2>
-                        <p>Nulla ac convallis lorem, eget euismod nisl. Donec in libero sit amet mi vulputate consectetur. Donec auctor interdum purus, ac finibus massa bibendum nec.</p>
+                        <p>Nulla ac convallis lorem, eget euismod nisl. Donec in libero sit amet mi vulputate
+                            consectetur. Donec auctor interdum purus, ac finibus massa bibendum nec.</p>
                     </div>
                 </div>
                 <!-- Newsletter Form -->
@@ -264,9 +275,14 @@
                             <a href="index.jsp"><img src="img/core-img/logo2.png" alt=""></a>
                         </div>
                         <!-- Copywrite Text -->
-                        <p class="copywrite"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
+                        <p class="copywrite">
+                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                            Copyright &copy;
+                            <script>document.write(new Date().getFullYear());</script> All rights reserved | This
+                            template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a
+                                href="https://colorlib.com" target="_blank">Colorlib</a>
+                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                        </p>
                     </div>
                 </div>
                 <!-- Single Widget Area -->
@@ -275,7 +291,10 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
                         <!-- Footer Menu -->
                         <div class="footer_menu">
                             <nav class="navbar navbar-expand-lg justify-content-end">
-                                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#footerNavContent" aria-controls="footerNavContent" aria-expanded="false" aria-label="Toggle navigation"><i class="fa fa-bars"></i></button>
+                                <button class="navbar-toggler" type="button" data-toggle="collapse"
+                                    data-target="#footerNavContent" aria-controls="footerNavContent"
+                                    aria-expanded="false" aria-label="Toggle navigation"><i
+                                        class="fa fa-bars"></i></button>
                                 <div class="collapse navbar-collapse" id="footerNavContent">
                                     <ul class="navbar-nav ml-auto">
                                         <li class="nav-item active">
@@ -285,7 +304,8 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
                                             <a class="nav-link" href="shop.jsp">Shop</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="product-detailsjs.product-details.jspp">Product</a>
+                                            <a class="nav-link"
+                                                href="product-detailsjs.product-details.jspp">Product</a>
                                         </li>
                                         <li class="nav-item">
                                             <a class="nav-link" href="cart.jsp">Cart</a>

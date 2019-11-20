@@ -73,8 +73,7 @@
             <nav class="amado-nav">
                 <ul>
                     <li class="active"><a href="index.jsp">Home</a></li>
-                    <li><a href="shop.jsp">Shop</a></li>
-                    <li><a href="product-details.jsp">Product</a></li>
+                    <li><a href="shop.jsp?categoryID=0">Shop</a></li>
                     <li><a href="cart.jsp">Cart</a></li>
                     <li><a href="checkout.jsp">Checkout</a></li>
                 </ul>
@@ -182,7 +181,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
                                             <a class="nav-link" href="index.jsp">Home</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="shop.jsp">Shop</a>
+                                            <a class="nav-link" href="shop.jsp?categoryID=0">Shop</a>
                                         </li>
                                         <li class="nav-item">
                                             <a class="nav-link" href="product-details.jsp">Product</a>
