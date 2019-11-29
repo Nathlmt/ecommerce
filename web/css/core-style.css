@@ -1066,6 +1066,7 @@ img {
     z-index: 1;
     overflow: hidden; }
     .single-product-wrapper .product-img img {
+      height: 200px;
       width: 100%;
       -webkit-transition-duration: 500ms;
       transition-duration: 500ms; }

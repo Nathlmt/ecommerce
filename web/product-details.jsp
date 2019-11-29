@@ -211,7 +211,7 @@
                             <!-- Add to Cart Form -->
                             <form class="cart clearfix" method="post">
                                 <div class="cart-btn d-flex mb-50">
-                                    <p>Qty</p>
+                                    <p>Số lượng</p>
                                     <div class="quantity">
                                         <span class="qty-minus" onclick="var effect = document.getElementById('qty'); var qty = effect.value;
                                          if( !isNaN( qty ) &amp;&amp; qty &gt; 1 ) effect.value--;return false;"><i
