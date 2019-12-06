@@ -104,7 +104,6 @@ public class Product {
     public void setPrice(float price) {
         this.price = price;
     }
-
     public void setThumbImage(String thumbImage) {
         this.thumbImage = thumbImage;
     }
@@ -124,10 +123,7 @@ public class Product {
     public void setCategoryID(int categoryID) {
         this.categoryID = categoryID;
     }
-
-    @Override
-    public String toString() {
-        return this.name; //To change body of generated methods, choose Tools | Templates.
-
+    public String toStringPrice() {
+        return  String.format(("%,.0f" + " đ"), this.price);
     }
 }
