@@ -11,3 +11,20 @@
     /* ---------------------------------------
     ##### - PLACE YOUR CUSTOM CSS HERE - #####
     --------------------------------------- */
+    .single-products-catagory .hover-content h4 {
+        color: white;
+        background-color: rgba(0,0,0,0.5);
+    }
+   .single-products-catagory .hover-content p {
+        color: white;
+    }
+    .login {
+        color: #FFBA31;
+        
+    }
+    .login:hover {
+        text-decoration: underline;
+        color:#FFBA31;
+        font-size: 1.5rem;
+        
+    }
