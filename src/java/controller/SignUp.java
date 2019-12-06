@@ -1,3 +1,5 @@
+package controller;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -83,25 +85,25 @@ public class SignUp extends HttpServlet {
 //         "<h1 align = \"center\">" + "cc" + "</h1>\n");
          
         try {
-            Class.forName("com.mysql.jdbc.Driver");
-            Connection connection = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/minhtu?characterEncoding=latin1&allowPublicKeyRetrieval=True&useSSL=false&serverTimezone=UTC",
-               "root", "0981012195");
             // Execute SQL query
-            PreparedStatement st = connection.prepareStatement("insert into user(name,email,phone,address,username,password"
-                    + ") values(?,?, ?, ?, ?, ?)");
-            st.setString(1, request.getParameter("name"));
-            st.setString(2, request.getParameter("email"));
-            st.setString(3, request.getParameter("phone"));
-            st.setString(4, request.getParameter("address"));
-            st.setString(5, request.getParameter("username"));
-            st.setString(6, request.getParameter("password"));
-            st.executeUpdate(); 
-            st.close(); 
-            connection.close();
+                         Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            try (Connection connection = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=eMarket;user=letuan;password=letuan123")) {
+                // Execute SQL query
+                PreparedStatement st = connection.prepareStatement("insert into customer(name,email,phone,address,username,password"
+                        + ") values(?,?, ?, ?, ?, ?)");
+                st.setString(1, request.getParameter("name"));
+                st.setString(2, request.getParameter("email"));
+                st.setString(3, request.getParameter("phone"));
+                st.setString(4, request.getParameter("address"));
+                st.setString(5, request.getParameter("username"));
+                st.setString(6, request.getParameter("password"));
+                st.executeUpdate();
+                st.close();
+            }
         } catch (SQLException | ClassNotFoundException e) {
             out.println("Error when you connect to database!Error is: " + e.getMessage());
         }
-        response.sendRedirect("http://localhost:52598/Project_1");
+//        response.sendRedirect("http://localhost:8080/Project_1"); 
 //        out.println("</body></html>");
     
     }
