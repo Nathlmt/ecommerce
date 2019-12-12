@@ -1,3 +1,4 @@
+<%@page import="controller.ults"%>
 <%@page import="entity.ShoppingCartItem"%>
 <%@page import="java.util.List"%>
 <%@page import="controller.ShoppingCart"%>
@@ -60,11 +61,10 @@
                     <span></span><span></span><span></span>
                 </div>
             </div>
-
             <!-- Header Area Start -->
-            <jsp:include page="navbar.jsp"></jsp:include>    
+            <jsp:include page="/components/navbar.jsp"></jsp:include>  
+            <jsp:include page="/components/userinfo.jsp"></jsp:include>    
                 <!-- Header Area End -->
-
                 <div class="cart-table-area section-padding-100">
                     <div class="container-fluid">
                         <div class="row">
@@ -105,7 +105,7 @@
                                                     <p>SL</p>
                                                     <div class="quantity">
                                                         <span class="qty-minus" onclick="var effect = document.getElementById('qty'); var qty = effect.value; if (!isNaN(qty) & amp; & amp; qty & gt; 1) effect.value--; return false;"><i class="fa fa-minus" aria-hidden="true"></i></span>
-                                                        <input type="number" class="qty-text" id="qty" step="1" min="1" max="300" name="quantity" value="1">
+                                                        <input type="number" class="qty-text" id="qty" step="1" min="1" max="300" name="quantity" value="<%=p.getQuantity()%>">
                                                         <span class="qty-plus" onclick="var effect = document.getElementById('qty');
                                                                 var qty = effect.value;
                                                                 if (!isNaN(qty))
@@ -131,15 +131,20 @@
                                             ShoppingCart cart = (ShoppingCart) session.getAttribute("cart");
                                             double subTotal = cart.getSubtotal();
                                             double ship = cart.calculateTotal();
-                                            double Total = ship + subTotal;
+                                            double total = ship + subTotal;
+                                            session.setAttribute("subTotal",subTotal); 
+                                            session.setAttribute("ship",ship); 
+                                            session.setAttribute("total",total); 
+
+
                                     %>
-                                    <li><span>Tạm tính:</span> <span><%=subTotal%></span></li>
-                                    <li><span>Phí vận chuyển:</span> <span><%=ship%></span></li>
-                                    <li><span>Thành tiền</span> <span><%=Total%></span></li>
+                                    <li><span>Tạm tính:</span> <span><%=ults.convertPrice(subTotal)%></span></li>
+                                    <li><span>Phí vận chuyển:</span> <span><%=ults.convertPrice(ship)%></span></li>
+                                    <li><span>Thành tiền</span> <span><%=ults.convertPrice(total)%></span></li>
                                         <%}%>
                                 </ul>
                                 <div class="cart-btn mt-100">
-                                    <a href="cart.jsp" class="btn amado-btn w-100">Thanh toán</a>
+                                    <a href="checkout.jsp" class="btn amado-btn w-100">Thanh toán</a>
                                 </div>
                             </div>
                         </div>
@@ -150,12 +155,12 @@
         <!-- ##### Main Content Wrapper End ##### -->
 
         <!-- ##### Newsletter Area Start ##### -->
-        <jsp:include page="subcribe.jsp"></jsp:include>    
+        <jsp:include page="/components/subcribe.jsp"></jsp:include>    
 
             <!-- ##### Newsletter Area End ##### -->
 
             <!-- ##### Footer Area Start ##### -->
-        <jsp:include page="footer.jsp"></jsp:include>    
+        <jsp:include page="/components/footer.jsp"></jsp:include>    
 
         <!-- ##### Footer Area End ##### -->
 

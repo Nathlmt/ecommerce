@@ -51,6 +51,7 @@
         </div>
     </div>
     <!-- Search Wrapper Area End -->
+            <jsp:include page="/components/userinfo.jsp"></jsp:include>    
 
     <!-- ##### Main Content Wrapper Start ##### -->
     <div class="main-content-wrapper d-flex clearfix">
@@ -68,7 +69,7 @@
         </div>
 
         <!-- Header Area Start -->
-         <jsp:include page="navbar.jsp"></jsp:include>    
+         <jsp:include page="/components/navbar.jsp"></jsp:include>    
         <!-- Header Area End -->
 
         <div class="shop_sidebar_area">
@@ -204,12 +205,12 @@
     <!-- ##### Main Content Wrapper End ##### -->
 
     <!-- ##### Newsletter Area Start ##### -->
-     <jsp:include page="subcribe.jsp"></jsp:include>    
+     <jsp:include page="/components/subcribe.jsp"></jsp:include>    
 
     <!-- ##### Newsletter Area End ##### -->
 
     <!-- ##### Footer Area Start ##### -->
-    <jsp:include page="footer.jsp"></jsp:include>    
+    <jsp:include page="/components/footer.jsp"></jsp:include>    
 
     <!-- ##### Footer Area End ##### -->
 

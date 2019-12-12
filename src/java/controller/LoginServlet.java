@@ -9,9 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
 import dao.CustomerDAOImple;
-
+import entity.Customer;
 public class LoginServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private final CustomerDAOImple customerDAO = new CustomerDAOImple();
@@ -40,11 +39,22 @@ public class LoginServlet extends HttpServlet {
                     HttpSession session = request.getSession();
                     session.setAttribute("username", username);
                     if(customerDAO.loginUser(username, password)){
+                  
+                        CustomerDAOImple customerDAOImple = new CustomerDAOImple();
+                        Customer customer = customerDAOImple.getCustomerByUserName(username);
+                              int customerID = customer.getCustomerID();
                         Cookie loginCookie = new Cookie("username", username);
+                        session.setAttribute("customer", customerID);
+                       int id = (int) session.getAttribute("customer");
+                        System.out.println("controller.LoginServlet.doPost()" + id);
                         //setting cookie to expiry in 60 mins
                         loginCookie.setMaxAge(60*60);
                         response.addCookie(loginCookie); 
-                        response.sendRedirect("/Project_1/admin");
+                        if (customer.getIsAdmin()) {
+                            System.out.println("customer.getIsAdmin()");
+                        response.sendRedirect("/Project_1/admin");}
+                        else 
+                        {response.sendRedirect("/Project_1/checkout.jsp");}
                     }
                 } 
                 else {

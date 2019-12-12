@@ -39,7 +39,11 @@ public class Customer {
     public String getAddress() {
         return address;
     }
-
+    
+    public boolean getIsAdmin() {
+        return isAdmin;
+    }
+    
     public String getCity() {
         return city;
     }

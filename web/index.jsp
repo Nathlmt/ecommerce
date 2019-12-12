@@ -60,7 +60,7 @@
         </div>
 
         <!-- Header Area Start -->
-         <jsp:include page="navbar.jsp"></jsp:include>    
+         <jsp:include page="/components/navbar.jsp"></jsp:include>    
         <!-- Header Area End -->
 
         <!-- Product Catagories Area Start -->
@@ -89,14 +89,14 @@
         <!-- Product Catagories Area End -->
     </div>
     <!-- ##### Main Content Wrapper End ##### -->
-     <jsp:include page="subcribe.jsp"></jsp:include>    
+     <jsp:include page="./components/subcribe.jsp"></jsp:include>    
 
     <!-- ##### Newsletter Area Start ##### -->
    
     <!-- ##### Newsletter Area End ##### -->
 
     <!-- ##### Footer Area Start ##### -->
-                <jsp:include page="footer.jsp"></jsp:include>    
+                <jsp:include page="./components/footer.jsp"></jsp:include>    
 
     <!-- ##### Footer Area End ##### -->
 

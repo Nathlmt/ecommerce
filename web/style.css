@@ -28,3 +28,11 @@
         font-size: 1.5rem;
         
     }
+    .user-info {
+        position: absolute;
+        right: 15px;
+        top: 10px;
+    }
+    .main-content-wrapper .cart-table-area .cart-summary .summary-table li {
+        text-transform: none;
+    }}

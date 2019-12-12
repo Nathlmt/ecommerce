@@ -31,7 +31,7 @@ public class ShoppingCart {
         for (ShoppingCartItem scItem : items) {
             if (scItem.getProduct().getProductID() == product.getProductID()) {
                 newItem = false;
-                scItem.incrementQuantity();
+                scItem.incrementQuantity((short)1);
             }
         }
         if (newItem) {
@@ -40,6 +40,20 @@ public class ShoppingCart {
         }
     }
 
+        public synchronized void addItem(Product product,String quantity) {
+        boolean newItem = true;
+        short qty = (short) Integer.parseInt(quantity);
+        for (ShoppingCartItem scItem : items) {
+            if (scItem.getProduct().getProductID() == product.getProductID()) {
+                newItem = false;
+                scItem.setQuantity(qty);
+            }
+        }
+        if (newItem) {
+            ShoppingCartItem scItem = new ShoppingCartItem(product, qty);
+            items.add(scItem);
+        }
+    }
     public synchronized void update(Product product, String quantity) {
         short qty = -1;
         qty = Short.parseShort(quantity);

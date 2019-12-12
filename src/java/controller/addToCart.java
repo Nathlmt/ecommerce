@@ -22,21 +22,22 @@ import javax.servlet.jsp.PageContext;
 public class addToCart extends HttpServlet {
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
      //To change body of generated methods, choose Tools | Templates.
         HttpSession session = req.getSession();
         ShoppingCart cart = (ShoppingCart) session.getAttribute("cart");
         if (cart == null) {
             cart = new ShoppingCart();
             session.setAttribute("cart", cart);
-            System.out.println("ksfskft.doGet()");
         }
 
-        String productID = req.getQueryString();
+        String productID = req.getParameter("productid");
+        String quantity = req.getParameter("quantity");
+
         if (!productID.isEmpty()) {
             ProductDAOImple producdaoImple = new ProductDAOImple();
             Product product = producdaoImple.getProduct(Integer.parseInt(productID));
-            cart.addItem(product);
+            cart.addItem(product, quantity);
 //                        session.setAttribute("cart", cart);
             resp.sendRedirect("/Project_1/cart.jsp");
 

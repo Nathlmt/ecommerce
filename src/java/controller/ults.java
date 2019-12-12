@@ -3,16 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package dao;
-
-import entity.Customer;
+package controller;
 
 /**
  *
  * @author Admin
  */
-public interface CustomerDAO {
-    public boolean loginUser(String username, String password); 
-    public Customer getCustomerByUserName(String username);
-    
+public class ults {
+
+    public static String convertPrice(double price) {
+         return  String.format(("%,.0f"), price) + " đ";
+    }
 }
